@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, TypeSynonymInstances, FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings, FlexibleInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-} -- IsString for XML
 
 -- | Overcome XML insanity, node by node.
@@ -36,6 +36,7 @@ module Text.XML.Writer
     ) where
 
 import Text.XML
+import Control.Monad
 import Control.Monad.Writer.Strict
 import Data.Default ()
 import qualified Data.DList as DL
@@ -223,7 +224,7 @@ soap :: (ToXML h, ToXML b)
      -> Document
 soap header body = document (sn "Envelope") $ do
     -- Some servers are allergic to dangling Headers...
-    when (not $ null headerContent) $ do
+    unless (null headerContent) $ do
         node . NodeElement $! Element (sn "Header") def headerContent
     element (sn "Body") (toXML body)
 
