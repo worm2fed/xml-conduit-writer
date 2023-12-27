@@ -1,6 +1,6 @@
 cabal-version:       3.0
 name:                xml-conduit-writer
-version:             0.1.1.3
+version:             0.1.2.0
 synopsis:            Warm and fuzzy creation of XML documents.
 description:
     “It can scarcely be denied that the supreme goal of
